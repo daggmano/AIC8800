@@ -8847,14 +8847,17 @@ if((g_rwnx_plat->usbdev->chipid == PRODUCT_ID_AIC8801) ||
 		goto err_lmac_reqs;
 	}
 
+
 #ifdef USE_5G
-	ret = rwnx_send_set_stack_start_req(rwnx_hw, 1, 0, CO_BIT(5), rwnx_hw->fwlog_en, &set_start_cfm);
-	if(rwnx_hw->usbdev->chipid == PRODUCT_ID_AIC8800DC ||
-			rwnx_hw->usbdev->chipid == PRODUCT_ID_AIC8800DW){
-		set_start_cfm.is_5g_support = false;
-	}
+    ret = rwnx_send_set_stack_start_req(rwnx_hw, 1, 0, CO_BIT(5), rwnx_hw->fwlog_en, &set_start_cfm);
+/*
+    if(rwnx_hw->usbdev->chipid == PRODUCT_ID_AIC8800DC ||
+            rwnx_hw->usbdev->chipid == PRODUCT_ID_AIC8800DW){
+        set_start_cfm.is_5g_support = false;
+    }
+*/
 #else
-	ret = rwnx_send_set_stack_start_req(rwnx_hw, 1, get_hardware_info(), feature.hwinfo, rwnx_hw->fwlog_en, &set_start_cfm);
+    ret = rwnx_send_set_stack_start_req(rwnx_hw, 1, get_hardware_info(), feature.hwinfo, rwnx_hw->fwlog_en, &set_start_cfm);
 #endif
 
     if (ret){
